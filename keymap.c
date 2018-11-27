@@ -20,15 +20,15 @@
 
 extern keymap_config_t keymap_config;
 
-enum planck_layers {
-  _QWERTY,
+ planck_layers {
+  _AZERTY,
   _ALTERED,
   _SPECIAL,
   _CONFIG
 };
 
 enum planck_keycodes {
-  QWERTY = SAFE_RANGE,
+  AZERTY = SAFE_RANGE,
   BACKLIT
 };
 
@@ -45,10 +45,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * | Shift|   W  |   X  |   C  |   V  |   B  |   N  |  ,?  |  ;.  |  :/  |  !§  |Enter |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |  Alt |  GUI | Ctrl |    Space    |  SPE | Left | Down |  Up  |Right |
+ * |      |  AL  |  GUI | Ctrl |SPECIA|    Space    |ALTERD| Left | Down |  Up  |Right |
  * `-----------------------------------------------------------------------------------'
  */
-[_QWERTY] = LAYOUT_planck_grid(
+[_AZERTY] = LAYOUT_planck_grid(
     KC_TAB,  FR_A,    FR_Z,    KC_E,    KC_R,      KC_T,    KC_Y,    KC_U,      KC_I,    KC_O,    KC_P,    KC_BSPC,
     KC_ESC,  FR_Q,    KC_S,    KC_D,    KC_F,      KC_G,    KC_H,    KC_J,      KC_K,    KC_L,    KC_SCLN, KC_ENT,
     KC_LSFT, FR_W,    KC_X,    KC_C,    KC_V,      KC_B,    KC_N,    KC_M,      KC_COMM, KC_DOT,  KC_SLSH, KC_ENT,
@@ -58,9 +58,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* ALTERED
  * ,-----------------------------------------------------------------------------------.
- * |   ²  |   &  |   é  |   "  |   '  |   (  |   )  |   ù  |   +  |   °  |   ¨  |   $  |
+ * |   ²  |   &  |   é  |   "  |   '  |   (  |   )  |   ù  |   +  |   °  |   ¨  |   `  |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |  Esc |   à  |   è  |   >  |   <  |   {  |   }  |   -  |   _  |   |  |   ^  |   `  |
+ * |  Esc |   à  |   è  |   >  |   <  |   {  |   }  |   -  |   _  |   |  |   ^  |   $  |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |   #  |   @  |   €  |   ç  |   *  |   [  |   ]  |   =  |   %  |   \  |   £  |   ~  |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
@@ -77,8 +77,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 
 /* SPECIAL
+ * Almost no changes from default here, but will soon be almost totally re-written
  * ,-----------------------------------------------------------------------------------.
- * |   `  |   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  | Bksp |
+ * |   ~  |   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  | Bksp |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
  * | Esc  |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |   -  |   =  |   [  |   ]  |  \   |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
@@ -107,7 +108,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_CONFIG] = LAYOUT_planck_grid(
     _______, RESET,   DEBUG,   RGB_TOG, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD, RGB_VAI, RGB_VAD, KC_DEL ,
-    _______, _______, MU_MOD,  AU_ON,   AU_OFF,  AG_NORM, AG_SWAP, QWERTY,  _______, _______,  _______,  _______,
+    _______, _______, MU_MOD,  AU_ON,   AU_OFF,  AG_NORM, AG_SWAP, AZERTY,  _______, _______,  _______,  _______,
     _______, MUV_DE,  MUV_IN,  MU_ON,   MU_OFF,  MI_ON,   MI_OFF,  TERM_ON, TERM_OFF, _______, _______, _______,
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
 )
@@ -125,10 +126,10 @@ uint32_t layer_state_set_user(uint32_t state) {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
-    case QWERTY:
+    case AZERTY:
       if (record->event.pressed) {
         print("mode just switched to qwerty and this is a huge string\n");
-        set_single_persistent_default_layer(_QWERTY);
+        set_single_persistent_default_layer(_AZERTY);
       }
       return false;
       break;
