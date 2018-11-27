@@ -1,19 +1,3 @@
-/* Copyright 2015-2017 Jack Humbert
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-
 #include QMK_KEYBOARD_H
 #include "keymap_extras/keymap_french.h"
 #include "muse.h"
@@ -37,7 +21,9 @@ enum planck_keycodes {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-/* 
+/* AZERTY
+ * This is a basic azerty layer with some layers modifiers and two enter keys to keep touch typing
+ * comfortable while programming
  * ,-----------------------------------------------------------------------------------.
  * | Tab  |   A  |   Z  |   E  |   R  |   T  |   Y  |   U  |   I  |   O  |   P  | Bksp |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
@@ -57,6 +43,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 
 /* ALTERED
+ * this is a french accentuated/altered characters and general programming special characters layers
  * ,-----------------------------------------------------------------------------------.
  * |   ²  |   &  |   é  |   "  |   '  |   (  |   )  |   ù  |   +  |   °  |   ¨  |   `  |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
@@ -78,6 +65,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* SPECIAL
  * Almost no changes from default here, but will soon be almost totally re-written
+ * It should contain a number grid, a function keys grid (if I don't put these on their own layer),
+ * and some media/utility keys/macros
  * ,-----------------------------------------------------------------------------------.
  * |   ~  |   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  | Bksp |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
@@ -96,6 +85,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 
 /* CONFIG (ALTERED + SPECIAL)
+ * this layer should contain only keyboard configuration and features controls, such as
+ * backlight, rgb, music mode, layouts enabled, etc
  * ,-----------------------------------------------------------------------------------.
  * |      | Reset|      |      |      |      |      |      |      |      |      |  Del |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
@@ -133,18 +124,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
-    // case COLEMAK:
-    //   if (record->event.pressed) {
-    //     set_single_persistent_default_layer(_COLEMAK);
-    //   }
-    //   return false;
-    //   break;
-    // case DVORAK:
-    //   if (record->event.pressed) {
-    //     set_single_persistent_default_layer(_DVORAK);
-    //   }
-    //   return false;
-    //   break;
     case BACKLIT:
       if (record->event.pressed) {
         register_code(KC_RSFT);
@@ -162,34 +141,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
-    // case PLOVER:
-    //   if (record->event.pressed) {
-    //     #ifdef AUDIO_ENABLE
-    //       stop_all_notes();
-    //       PLAY_SONG(plover_song);
-    //     #endif
-    //     layer_off(_SPECIAL);
-    //     layer_off(_ALTERED);
-    //     layer_off(_CONFIG);
-    //     layer_on(_PLOVER);
-    //     if (!eeconfig_is_enabled()) {
-    //         eeconfig_init();
-    //     }
-    //     keymap_config.raw = eeconfig_read_keymap();
-    //     keymap_config.nkro = 1;
-    //     eeconfig_update_keymap(keymap_config.raw);
-    //   }
-    //   return false;
-    //   break;
-    // case EXT_PLV:
-    //   if (record->event.pressed) {
-    //     #ifdef AUDIO_ENABLE
-    //       PLAY_SONG(plover_gb_song);
-    //     #endif
-    //     layer_off(_PLOVER);
-    //   }
-    //   return false;
-    //   break;
   }
   return true;
 }
